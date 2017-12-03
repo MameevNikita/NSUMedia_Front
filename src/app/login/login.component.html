@@ -1,0 +1,23 @@
+<div *ngIf="!isLogged()">
+
+  <div>
+    <label>Login:
+      <input [(ngModel)]="authData.login">
+    </label>
+  </div>
+
+  <div>
+    <label>Password:
+      <input [(ngModel)]="authData.password" type="password">
+    </label>
+  </div>
+
+  <button (click)="register()">Sign up</button>
+  <button (click)="enter()">Sign in</button>
+
+</div>
+
+<div *ngIf="isLogged()">
+  <h2>You are logged!</h2>
+  <button (click)="logout()">Logout</button>
+</div>
