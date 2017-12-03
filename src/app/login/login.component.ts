@@ -20,6 +20,15 @@ export class LoginComponent implements OnInit {
     return this.loginService.isLogged();
   }
 
+  logout(): void{
+    this.loginService.logout().subscribe(next => {
+        console.log('Exited');
+      },
+      error => {
+        console.error(error);
+      });
+  }
+
   register(): void {
     this.loginService.register(this.authData).subscribe(next => {
         console.log('Registered user ');
