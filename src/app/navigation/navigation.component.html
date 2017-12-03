@@ -1,0 +1,19 @@
+<h2>Navigation</h2>
+<div *ngIf="currentFolder">
+
+  <h3>Current folder: {{currentFolder.name}}</h3>
+
+  <div *ngIf="currentFolder.parentFolder">
+  <button (click)="gotoFolder(currentFolder.parentFolder)">{{currentFolder.parentFolder.name}}</button>
+  </div>
+
+  <li *ngFor="let folder of currentFolder.subfolders">
+  <button (click)="gotoFolder(folder)">{{folder.name}}</button>
+</li>
+
+  <li *ngFor="let file of currentFolder.files">
+    <button (click)="gotoFile(file)">{{file.name}}</button>
+  </li>
+
+</div>
+
