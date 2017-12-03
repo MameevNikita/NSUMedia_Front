@@ -1,0 +1,15 @@
+<h2>File info</h2>
+<div *ngIf="currentFile">
+
+  <h3>File: {{currentFile.name}}</h3>
+  <div *ngIf="currentFile.creator">
+    <h3>Creator: {{currentFile.creator.login}}</h3>
+  </div>
+  <h3>Faculty: {{currentFile.faculty}}</h3>
+  <h3>Discipline: {{currentFile.discipline}}</h3>
+  <h3>Year: {{currentFile.year}}</h3>
+  <h3>Checked: {{currentFile.checked}}</h3>
+</div>
+
+<button (click)="goBack()">Go back</button>
+
