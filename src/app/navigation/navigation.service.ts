@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import {Subject} from "rxjs/Subject";
 import {Folder} from "./folder";
 import {LoginService} from "../login/login.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class NavigationService extends Subject<Folder> {
@@ -16,6 +17,7 @@ export class NavigationService extends Subject<Folder> {
 
   private rootFolder = this.SERVER + '/navigation/rootFolder';
   private folderInfo = this.SERVER + '/navigation/folder/';
+  private fileInfo = this.SERVER + '/navigation/file/';
 
   private currentFolder: Folder;
 
@@ -35,6 +37,10 @@ export class NavigationService extends Subject<Folder> {
       console.log('Move to: ' + folder.name);
       this.next(this.getCurrentFolder());
     });
+  }
+
+  getFileInfo(fileId: number): Observable<File> {
+    return this.http.get<File>(this.fileInfo + fileId);
   }
 
   getCurrentFolder(): Folder {

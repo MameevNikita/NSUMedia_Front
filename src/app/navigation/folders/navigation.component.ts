@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationService} from "./navigation.service";
-import {Folder} from "./folder";
+import {NavigationService} from "../navigation.service";
+import {Folder} from "../folder";
+import {Router} from "@angular/router";
+import {File} from "../file";
 
 
 @Component({
@@ -11,7 +13,7 @@ import {Folder} from "./folder";
 export class NavigationComponent implements OnInit {
   private currentFolder: Folder;
 
-  constructor(private navigationService: NavigationService) {
+  constructor(private navigationService: NavigationService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,6 +29,6 @@ export class NavigationComponent implements OnInit {
   }
 
   gotoFile(file: File) {
-
+    this.router.navigate(['/fileInfo', file.id]);
   }
 }
