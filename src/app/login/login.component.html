@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!isLogged()">
 
   <div>
     <label>Login:
@@ -17,3 +17,6 @@
 
 </div>
 
+<div *ngIf="isLogged()">
+  <h2>You are logged!</h2>
+</div>

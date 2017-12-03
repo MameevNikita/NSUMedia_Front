@@ -10,6 +10,7 @@ import {Subject} from "rxjs/Subject";
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import {AuthData} from "./auth-data";
 import {User} from "./user";
+import {Token} from "./token";
 
 @Injectable()
 export class LoginService extends Subject<any>{
@@ -51,5 +52,16 @@ export class LoginService extends Subject<any>{
 
   register(authData: AuthData): Observable<User>{
     return this.http.post<User>(this.userInfo, authData);
+  }
+
+  enter(authData: AuthData): Observable<Token>{
+    let observable = this.http.post<Token>(this.userLogin, authData);
+
+    observable.subscribe(token=>{
+      console.log('Got token: ' + token.data);
+      this.token = token.data;
+    });
+
+    return observable;
   }
 }

@@ -31,6 +31,11 @@ export class LoginComponent implements OnInit {
   }
 
   enter(): void {
-
+    this.loginService.enter(this.authData).subscribe(next => {
+        console.log('Entered');
+      },
+      error => {
+        console.error(error);
+      })
   }
 }
