@@ -1,0 +1,32 @@
+<h2>File upload</h2>
+
+<div>
+  Факультет:
+  <input type="text" (keyup)="facultyChange($event)">
+</div>
+
+<div>
+  Предмет:
+  <input type="text" (keyup)="disciplineChange($event)">
+</div>
+
+<div>
+  Тип документа:
+  <input type="text" (keyup)="documentTypeChange($event)">
+</div>
+<div>
+  Readability: <input type="number" min="1" max="5" step="1" placeholder="1" (change)="readabilityChanged($event)">
+</div>
+<div>
+  Fullness: <input type="number" min="1" max="5" step="1" placeholder="1" (change)="fullnessChanged($event)">
+</div>
+<div>
+  Year: <input type="number" min="1970" max="2070" step="1" placeholder="1970" (change)="yearChanged($event)">
+</div>
+
+<input type="file" (change)="fileChange($event)" placeholder="Upload file">
+
+<button (click)="upload()" [disabled]="!isMetainfoValid()">Upload</button>
+
+<button (click)="goBack()">Go back</button>
+

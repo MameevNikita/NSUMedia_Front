@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationService} from "../navigation.service";
 import {Folder} from "../folder";
 import {Router} from "@angular/router";
-import {File} from "../file";
+import {FileInfo} from "../file";
 
 
 @Component({
@@ -28,7 +28,12 @@ export class NavigationComponent implements OnInit {
     this.navigationService.gotoFolder(folder.id);
   }
 
-  gotoFile(file: File) {
+  gotoFile(file: FileInfo) {
     this.router.navigate(['/fileInfo', file.id]);
+  }
+
+  uploadFile() {
+    console.log('Goto upload page');
+    this.router.navigateByUrl('/fileUpload');
   }
 }

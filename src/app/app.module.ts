@@ -10,13 +10,16 @@ import {NavigationComponent} from "./navigation/folders/navigation.component";
 import {NavigationService} from "./navigation/navigation.service";
 import {AppRoutingModule} from "./navigation/app-routing.module";
 import {FileComponent} from "./navigation/file/file.component";
+import {FileUploadComponent} from "./navigation/upload/upload.component";
+import {LoadService} from "./navigation/load.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavigationComponent,
-    FileComponent
+    FileComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,7 @@ import {FileComponent} from "./navigation/file/file.component";
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [LoginService, NavigationService],
+  providers: [LoginService, NavigationService, LoadService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
