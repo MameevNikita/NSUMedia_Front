@@ -3,15 +3,14 @@ import {LoginService} from "../login/login.service";
 import {FileInfo} from "./file";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
+import { saveAs } from 'file-saver'
 
 @Injectable()
 export class LoadService {
-  private tokenKey = 'AUTH_TOKEN';
   private SERVER = 'http://localhost:9001/';
   private uploadFile = this.SERVER + 'upload';
   private uploadFileData = this.SERVER + 'uploadData/';
   private downloadFile = this.SERVER + 'download/';
-
 
 
   constructor(private http: HttpClient, private loginService: LoginService) {
@@ -31,7 +30,7 @@ export class LoadService {
           headers.append('Accept', 'application/json');
 
           this.http.post<FileInfo>(this.uploadFileData + savedFileInfo.id, formData, {headers: headers}).subscribe(
-            fileInfo=>{
+            fileInfo => {
               observer.next(fileInfo);
             }
           );
@@ -40,5 +39,14 @@ export class LoadService {
     );
 
     return observable;
+  }
+
+  download(file: FileInfo) {
+    this.http.get(this.downloadFile + file.id, {responseType: 'blob'}).subscribe(
+      (response) => {
+        let blob = response;
+        let filename = file.name;
+        saveAs(blob, filename);
+      });
   }
 }
