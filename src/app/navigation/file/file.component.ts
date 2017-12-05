@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NavigationService} from "../navigation.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
+import {LoadService} from "../load.service";
+import {FileInfo} from "../file";
 
 
 @Component({
@@ -10,13 +12,14 @@ import {Location} from '@angular/common';
   styleUrls: ['./file.component.css']
 })
 export class FileComponent implements OnInit {
-  private currentFile: File;
+  private currentFile: FileInfo;
   private id: number;
 
   constructor(private navigationService: NavigationService,
               private route: ActivatedRoute,
               private location: Location,
-              private router: Router) {
+              private router: Router,
+              private loadService: LoadService) {
   }
 
   ngOnInit() {
@@ -30,7 +33,7 @@ export class FileComponent implements OnInit {
   }
 
   download() {
-
+    this.loadService.download(this.currentFile);
   }
 
   goBack() {

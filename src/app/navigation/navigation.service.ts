@@ -8,6 +8,7 @@ import {Subject} from "rxjs/Subject";
 import {Folder} from "./folder";
 import {LoginService} from "../login/login.service";
 import {Observable} from "rxjs/Observable";
+import {FileInfo} from "./file";
 
 @Injectable()
 export class NavigationService extends Subject<Folder> {
@@ -39,8 +40,8 @@ export class NavigationService extends Subject<Folder> {
     });
   }
 
-  getFileInfo(fileId: number): Observable<File> {
-    return this.http.get<File>(this.fileInfo + fileId);
+  getFileInfo(fileId: number): Observable<FileInfo> {
+    return this.http.get<FileInfo>(this.fileInfo + fileId);
   }
 
   getCurrentFolder(): Folder {
