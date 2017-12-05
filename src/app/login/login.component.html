@@ -18,6 +18,8 @@
 </div>
 
 <div *ngIf="isLogged()">
-  <h2>You are logged!</h2>
+  <div *ngIf="userInfo">
+    <h2>You are logged as {{userInfo.login}}. Role: {{userInfo.role}}</h2>
+  </div>
   <button (click)="logout()">Logout</button>
 </div>

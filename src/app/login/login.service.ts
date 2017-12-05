@@ -8,8 +8,8 @@ import 'rxjs/add/operator/map';
 import {Subject} from "rxjs/Subject";
 import {Cookie} from 'ng2-cookies/ng2-cookies';
 import {AuthData} from "./auth-data";
-import {User} from "./user";
 import {Token} from "./token";
+import {UserPublic} from "./user-public";
 
 @Injectable()
 export class LoginService extends Subject<any> {
@@ -49,8 +49,8 @@ export class LoginService extends Subject<any> {
     return headers;
   }
 
-  register(authData: AuthData): Observable<User> {
-    return this.http.post<User>(this.userInfo, authData);
+  register(authData: AuthData): Observable<UserPublic> {
+    return this.http.post<UserPublic>(this.userInfo, authData);
   }
 
   enter(authData: AuthData): Observable<Token> {

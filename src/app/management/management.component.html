@@ -1,0 +1,8 @@
+<div *ngIf="isLogged() && userInfo">
+
+  Management:
+  <div *ngIf="userInfo.role == 'ADMINISTRATOR'">
+    <button (click)="showUsersList()">Users List</button>
+  </div>
+</div>
+
