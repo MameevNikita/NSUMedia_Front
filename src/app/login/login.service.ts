@@ -23,6 +23,7 @@ export class LoginService extends Subject<any> {
   private myUserInfo = this.SERVER + '/users/me';
 
   private token: string;
+  private savedUserInfo: UserPublic;
 
   constructor(private http: HttpClient) {
     super();
@@ -31,18 +32,33 @@ export class LoginService extends Subject<any> {
     if (savedToken != null) {
       this.token = savedToken;
 
-      this.getMyUserInfo().subscribe(next => {
-        this.next();
+      this.getMyUserInfo().subscribe(userInfo => {
+        console.log('Token is good');
+        this.savedUserInfo = userInfo;
+        this.onUserStateChanged();
       }, err => {
+        console.log('Token is bad, logout');
         this.token = null;
-        this.next();
+        this.savedUserInfo = null;
+        this.onUserStateChanged();
       });
     }
   }
 
 
   getMyUserInfo(): Observable<UserPublic> {
-    return this.http.get<UserPublic>(this.myUserInfo, {headers: this.getAuthHeaders()});
+    return new Observable<UserPublic>(observer => {
+      this.http.get<UserPublic>(this.myUserInfo, {headers: this.getAuthHeaders()}).subscribe(userInfo => {
+        this.savedUserInfo = userInfo;
+        observer.next(userInfo);
+      }, err => {
+        observer.error(err);
+      });
+    });
+  }
+
+  getSavedUserInfo(): UserPublic {
+    return this.savedUserInfo;
   }
 
   isLogged(): boolean {
@@ -86,6 +102,7 @@ export class LoginService extends Subject<any> {
       this.http.get<Token>(this.userLogout, {headers: this.getAuthHeaders()}).subscribe(data => {
         Cookie.delete(this.tokenKey);
         this.token = null;
+        this.savedUserInfo = null;
         observer.next(data);
         this.onUserStateChanged();
       });
