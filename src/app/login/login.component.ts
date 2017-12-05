@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "./login.service";
 import {AuthData} from "./auth-data";
+import {UserPublic} from "./user-public";
+import {UsersService} from "../management/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -9,11 +12,17 @@ import {AuthData} from "./auth-data";
 })
 export class LoginComponent implements OnInit {
   authData: AuthData = new AuthData;
+  userInfo: UserPublic;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private userService: UsersService, private router: Router) {
   }
 
   ngOnInit() {
+    this.loginService.subscribe(next=>{
+      this.getUserInfo();
+    });
+
+    this.getUserInfo();
   }
 
   isLogged() {
@@ -23,6 +32,7 @@ export class LoginComponent implements OnInit {
   logout(): void{
     this.loginService.logout().subscribe(next => {
         console.log('Exited');
+        this.router.navigate(['/']);
       },
       error => {
         console.error(error);
@@ -39,9 +49,18 @@ export class LoginComponent implements OnInit {
       })
   }
 
+  getUserInfo(){
+    if(this.isLogged()){
+      this.loginService.getMyUserInfo().subscribe(userInfo => {
+        console.log('Got user info: ' + userInfo.role);
+        this.userInfo = userInfo;
+      });
+    }
+  }
+
   enter(): void {
     this.loginService.enter(this.authData).subscribe(next => {
-        console.log('Entered');
+        this.getUserInfo();
       },
       error => {
         console.error(error);

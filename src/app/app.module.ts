@@ -12,6 +12,9 @@ import {AppRoutingModule} from "./navigation/app-routing.module";
 import {FileComponent} from "./navigation/file/file.component";
 import {FileUploadComponent} from "./navigation/upload/upload.component";
 import {LoadService} from "./navigation/load.service";
+import {UsersService} from "./management/user.service";
+import {ManagementComponent} from "./management/management.component";
+import {UsersListComponent} from "./management/users-list/users-list.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import {LoadService} from "./navigation/load.service";
     LoginComponent,
     NavigationComponent,
     FileComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ManagementComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,7 @@ import {LoadService} from "./navigation/load.service";
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [LoginService, NavigationService, LoadService],
+  providers: [LoginService, NavigationService, LoadService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
