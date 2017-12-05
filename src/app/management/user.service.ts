@@ -14,8 +14,8 @@ export class UsersService {
 
   private allUsers = this.SERVER + '/users/all';
   private userInfo = this.SERVER + '/users/user/';
-  private myUserInfo = this.SERVER + '/users/me';
   private allRoles = this.SERVER + '/roles/all';
+  private changeUserRole = this.SERVER + '/roles/change';
 
   constructor(private http: HttpClient, private loginService: LoginService) {
   }
@@ -32,7 +32,7 @@ export class UsersService {
     return this.http.get<UserPublic>(this.userInfo + userid, {headers: this.loginService.getAuthHeaders()});
   }
 
-  getMyUserInfo(): Observable<UserPublic> {
-    return this.http.get<UserPublic>(this.myUserInfo, {headers: this.loginService.getAuthHeaders()});
+  changeRole(user: UserPublic): Observable<UserPublic> {
+    return this.http.post<UserPublic>(this.changeUserRole, user, {headers: this.loginService.getAuthHeaders()});
   }
 }

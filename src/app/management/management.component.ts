@@ -12,12 +12,18 @@ import {Router} from "@angular/router";
 export class ManagementComponent implements OnInit {
   userInfo: UserPublic;
 
-  constructor(private loginService: LoginService, private userService: UsersService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router) {
   }
 
   ngOnInit() {
+    this.loginService.subscribe(next=> {
+      this.updateUserInfo();
+    });
+  }
+
+  updateUserInfo(){
     if (this.isLogged()) {
-      this.userService.getMyUserInfo().subscribe(userInfo => this.userInfo = userInfo);
+      this.loginService.getMyUserInfo().subscribe(userInfo => this.userInfo = userInfo);
     }
   }
 

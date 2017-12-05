@@ -5,7 +5,7 @@
 
     <div *ngIf="roles">
       Role:
-      <select [(ngModel)]="user.role">
+      <select [(ngModel)]="user.role" (change)="onRoleChange(user)">
         <option *ngFor="let c of roles" [ngValue]="c">{{c}}</option>
       </select>
     </div>

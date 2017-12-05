@@ -20,6 +20,7 @@ export class LoginService extends Subject<any> {
   private userLogin = this.SERVER + 'login';
   private userLogout = this.SERVER + 'logoff';
   private userInfo = this.SERVER + 'register';
+  private myUserInfo = this.SERVER + '/users/me';
 
   private token: string;
 
@@ -29,8 +30,19 @@ export class LoginService extends Subject<any> {
     console.log("Get saved token: " + savedToken);
     if (savedToken != null) {
       this.token = savedToken;
-      this.next();
+
+      this.getMyUserInfo().subscribe(next => {
+        this.next();
+      }, err => {
+        this.token = null;
+        this.next();
+      });
     }
+  }
+
+
+  getMyUserInfo(): Observable<UserPublic> {
+    return this.http.get<UserPublic>(this.myUserInfo, {headers: this.getAuthHeaders()});
   }
 
   isLogged(): boolean {
@@ -54,25 +66,29 @@ export class LoginService extends Subject<any> {
   }
 
   enter(authData: AuthData): Observable<Token> {
-    let observable = this.http.post<Token>(this.userLogin, authData);
-
-    observable.subscribe(token => {
-      console.log('Got token: ' + token.data);
-      Cookie.set(this.tokenKey, token.data);
-      this.token = token.data;
+    return new Observable<Token>(observer => {
+      this.http.post<Token>(this.userLogin, authData).subscribe(token => {
+        console.log('Got token: ' + token.data);
+        Cookie.set(this.tokenKey, token.data);
+        this.token = token.data;
+        observer.next(token);
+        this.onUserStateChanged();
+      });
     });
+  }
 
-    return observable;
+  onUserStateChanged() {
+    this.next();
   }
 
   logout(): Observable<Token> {
-    let observable = this.http.get<Token>(this.userLogout, {headers: this.getAuthHeaders()});
-
-    observable.subscribe(data => {
-      Cookie.delete(this.tokenKey);
-      this.token = null;
+    return new Observable<Token>(observer => {
+      this.http.get<Token>(this.userLogout, {headers: this.getAuthHeaders()}).subscribe(data => {
+        Cookie.delete(this.tokenKey);
+        this.token = null;
+        observer.next(data);
+        this.onUserStateChanged();
+      });
     });
-
-    return observable;
   }
 }

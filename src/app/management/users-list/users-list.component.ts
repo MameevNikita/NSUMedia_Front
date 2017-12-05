@@ -16,14 +16,23 @@ export class UsersListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.updateUsersList();
+    this.userService.getRolesList().subscribe(roles => this.roles = roles);
+  }
+
+  updateUsersList(){
     if (this.isLogged()) {
       this.userService.getUsersList().subscribe(usersInfo => this.usersInfo = usersInfo);
     }
-
-    this.userService.getRolesList().subscribe(roles => this.roles = roles);
   }
 
   isLogged() {
     return this.loginService.isLogged();
+  }
+
+  onRoleChange(user: UserPublic) {
+    this.userService.changeRole(user).subscribe(next=>{
+      this.updateUsersList();
+    });
   }
 }
