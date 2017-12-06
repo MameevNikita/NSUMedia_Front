@@ -50,6 +50,7 @@ export class LoginService extends Subject<any> {
     return new Observable<UserPublic>(observer => {
       this.http.get<UserPublic>(this.myUserInfo, {headers: this.getAuthHeaders()}).subscribe(userInfo => {
         this.savedUserInfo = userInfo;
+        console.log(this.savedUserInfo);
         observer.next(userInfo);
       }, err => {
         observer.error(err);

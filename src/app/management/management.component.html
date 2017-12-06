@@ -3,6 +3,10 @@
   Management:
   <div *ngIf="userInfo.role == 'ADMINISTRATOR'">
     <button (click)="showUsersList()">Users List</button>
+    <button (click)="showAllFiles()">All files</button>
   </div>
+
+  <button (click)="showMyFiles()">My files</button>
 </div>
 
+<button (click)="toStartPage()">To start page</button>
