@@ -16,6 +16,9 @@ import {UsersService} from "./management/user.service";
 import {ManagementComponent} from "./management/management.component";
 import {UsersListComponent} from "./management/users-list/users-list.component";
 import {EditAccountComponent} from "./login/edit-account/edit-account.component";
+import {FileManagementService} from "./management/file-management.service";
+import {FilesListComponent} from "./navigation/files-list/files-list.component";
+import {FileListService} from "./navigation/files-list/file-list.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import {EditAccountComponent} from "./login/edit-account/edit-account.component"
     FileUploadComponent,
     ManagementComponent,
     UsersListComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    FilesListComponent
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import {EditAccountComponent} from "./login/edit-account/edit-account.component"
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [LoginService, NavigationService, LoadService, UsersService],
+  providers: [LoginService, NavigationService, LoadService, UsersService, FileManagementService, FileListService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

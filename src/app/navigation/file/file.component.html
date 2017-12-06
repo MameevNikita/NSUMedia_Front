@@ -11,6 +11,15 @@
   <h3>Checked: {{currentFile.checked}}</h3>
 
   <button (click)="download()">Download</button>
+
+  <div *ngIf="canDelete()">
+  <button (click)="deleteFile()">Delete</button>
+  </div>
+
+  <div *ngIf="canMark()">
+  <button (click)="markAsChecked()">Mark as checked</button>
+  </div>
+
 </div>
 
 <button (click)="goBack()">Go back</button>

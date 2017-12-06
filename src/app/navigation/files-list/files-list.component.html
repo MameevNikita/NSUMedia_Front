@@ -1,0 +1,7 @@
+<h3>Files list:</h3>
+
+<div *ngIf="files">
+<li *ngFor="let file of files">
+  <button (click)="gotoFile(file)">{{file.faculty}}/{{file.discipline}}/{{file.documentType}}/{{file.creator.login}}/{{file.name}}</button> {{file.checked}}
+</li>
+</div>

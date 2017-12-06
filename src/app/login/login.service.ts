@@ -33,11 +33,15 @@ export class LoginService extends Subject<any> {
     if (savedToken != null) {
       this.token = savedToken;
 
-      this.getMyUserInfo().subscribe(next => {
-        this.next();
+      this.getMyUserInfo().subscribe(userInfo => {
+        console.log('Token is good');
+        this.savedUserInfo = userInfo;
+        this.onUserStateChanged();
       }, err => {
+        console.log('Token is bad, logout');
         this.token = null;
-        this.next();
+        this.savedUserInfo = null;
+        this.onUserStateChanged();
       });
     }
   }
@@ -52,6 +56,10 @@ export class LoginService extends Subject<any> {
         observer.error(err);
       });
     });
+  }
+
+  getSavedUserInfo(): UserPublic {
+    return this.savedUserInfo;
   }
 
   isLogged(): boolean {
@@ -95,6 +103,7 @@ export class LoginService extends Subject<any> {
       this.http.get<Token>(this.userLogout, {headers: this.getAuthHeaders()}).subscribe(data => {
         Cookie.delete(this.tokenKey);
         this.token = null;
+        this.savedUserInfo = null;
         observer.next(data);
         this.onUserStateChanged();
       });

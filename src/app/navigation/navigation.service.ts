@@ -19,6 +19,8 @@ export class NavigationService extends Subject<Folder> {
   private rootFolder = this.SERVER + '/navigation/rootFolder';
   private folderInfo = this.SERVER + '/navigation/folder/';
   private fileInfo = this.SERVER + '/navigation/file/';
+  private allFiles = this.SERVER + '/navigation/allFiles';
+  private filesOfUser = this.SERVER + '/navigation/filesOfUser/';
 
   private currentFolder: Folder;
 
@@ -42,6 +44,14 @@ export class NavigationService extends Subject<Folder> {
 
   getFileInfo(fileId: number): Observable<FileInfo> {
     return this.http.get<FileInfo>(this.fileInfo + fileId);
+  }
+
+  getAllFiles(): Observable<FileInfo[]> {
+    return this.http.get<FileInfo[]>(this.allFiles);
+  }
+
+  getUserFiles(userId: number): Observable<FileInfo[]> {
+    return this.http.get<FileInfo[]>(this.filesOfUser + userId);
   }
 
   getCurrentFolder(): Folder {
