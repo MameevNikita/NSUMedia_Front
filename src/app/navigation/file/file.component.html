@@ -1,26 +1,88 @@
-<h2>File info</h2>
-<div *ngIf="currentFile">
+<span *ngIf="currentFile">
 
-  <h3>File: {{currentFile.name}}</h3>
-  <div *ngIf="currentFile.creator">
-    <h3>Creator: {{currentFile.creator.login}}</h3>
-  </div>
-  <h3>Faculty: {{currentFile.faculty}}</h3>
-  <h3>Discipline: {{currentFile.discipline}}</h3>
-  <h3>Year: {{currentFile.year}}</h3>
-  <h3>Checked: {{currentFile.checked}}</h3>
+  <table>
 
-  <button (click)="download()">Download</button>
+    <tr>
+      <td class="keyRow">
+        Название:
+      </td>
+      <td class="valueRow">
+        {{currentFile.name}}
+      </td>
+    </tr>
+  <tr *ngIf="currentFile.creator">
+    <td class="keyRow">
+      Создатель:
+    </td>
+    <td class="valueRow">
+      {{currentFile.creator.login}}
+    </td>
+  </tr>
+  <tr>
+    <td class="keyRow">
+      Факультет:
+  </td>
+    <td class="valueRow">
+      {{currentFile.faculty}}
+    </td>
+  </tr>
+  <tr>
+    <td class="keyRow">
+      Дисциплина:
+    </td>
+    <td class="valueRow">
+      {{currentFile.discipline}}
+    </td>
+  </tr>
+      <tr>
+    <td class="keyRow">
+      Полнота:
+    </td>
+    <td class="valueRow">
+      {{currentFile.readability}}
+    </td>
+  </tr>
+      <tr>
+    <td class="keyRow">
+      Читаемость:
+    </td>
+    <td class="valueRow">
+      {{currentFile.fullness}}
+    </td>
+  </tr>
+  <tr>
+    <td class="keyRow">
+      Год:
+    </td>
+    <td class="valueRow">
+      {{currentFile.year}}
+    </td>
+  </tr>
+    <tr>
+      <td class="keyRow">
+        Проверен:
+      </td>
+      <td class="valueRow">
+        <span *ngIf="currentFile.checked == true">Да</span>
+        <span *ngIf="currentFile.checked == false">Нет</span>
+      </td>
+    </tr>
+  </table>
 
-  <div *ngIf="canDelete()">
-  <button (click)="deleteFile()">Delete</button>
-  </div>
+  <div class="buttonPanel">
+  <button class="importantButton" (click)="download()">Скачать</button>
 
-  <div *ngIf="canMark()">
-  <button (click)="markAsChecked()">Mark as checked</button>
-  </div>
+  <span *ngIf="canDelete()">
+  <button class="importantButton" (click)="deleteFile()">Удалить</button>
+  </span>
 
-</div>
+  <span *ngIf="canMark()">
+  <button (click)="markAsChecked()">Пометить как проверенный</button>
+  </span>
 
-<button (click)="goBack()">Go back</button>
+  <button (click)="goBack()">Вернуться назад</button>
+    </div>
+</span>
+
+
 

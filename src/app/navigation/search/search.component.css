@@ -1,0 +1,11 @@
+input{
+  width: calc(100% - 130pt);
+}
+
+button.clear{
+  width: 20pt;
+}
+
+button.importantButton{
+  width: 100pt;
+}

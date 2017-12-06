@@ -1,0 +1,17 @@
+button{
+  width: 96%;
+  margin-top: 2pt;
+  margin-bottom: 2pt;
+  margin-left: 2%;
+}
+
+input{
+  width: 96%;
+  margin-top: 2pt;
+  margin-bottom: 2pt;
+  margin-left: 2%;
+}
+
+body{
+  white-space: normal;
+}

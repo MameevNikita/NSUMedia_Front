@@ -1,14 +1,15 @@
 <div *ngIf="usersInfo">
-  All users:
-  <li *ngFor="let user of usersInfo">
+  <div class="outerPanel" *ngFor="let user of usersInfo">
+    <div class="innerPanel">
     {{user.login}}
 
     <div *ngIf="roles">
-      Role:
+      Роль:
       <select [(ngModel)]="user.role" (change)="onRoleChange(user)">
         <option *ngFor="let c of roles" [ngValue]="c">{{c}}</option>
       </select>
     </div>
-  </li>
+  </div>
+  </div>
 </div>
 
