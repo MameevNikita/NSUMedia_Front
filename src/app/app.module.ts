@@ -19,6 +19,7 @@ import {EditAccountComponent} from "./login/edit-account/edit-account.component"
 import {FileManagementService} from "./management/file-management.service";
 import {FilesListComponent} from "./navigation/files-list/files-list.component";
 import {FileListService} from "./navigation/files-list/file-list.service";
+import {SearchComponent} from "./navigation/search/search.component";
 
 @NgModule({
   declarations: [
@@ -30,8 +31,8 @@ import {FileListService} from "./navigation/files-list/file-list.service";
     ManagementComponent,
     UsersListComponent,
     EditAccountComponent,
-    FilesListComponent
-
+    FilesListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

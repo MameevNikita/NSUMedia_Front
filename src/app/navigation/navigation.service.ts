@@ -20,6 +20,7 @@ export class NavigationService extends Subject<Folder> {
   private folderInfo = this.SERVER + '/navigation/folder/';
   private fileInfo = this.SERVER + '/navigation/file/';
   private allFiles = this.SERVER + '/navigation/allFiles';
+  private search = this.SERVER + '/navigation/search';
   private filesOfUser = this.SERVER + '/navigation/filesOfUser/';
 
   private currentFolder: Folder;
@@ -56,5 +57,9 @@ export class NavigationService extends Subject<Folder> {
 
   getCurrentFolder(): Folder {
     return this.currentFolder;
+  }
+
+  searchFiles(searchRequest: string): Observable<FileInfo[]> {
+    return this.http.post<FileInfo[]>(this.search, searchRequest);
   }
 }

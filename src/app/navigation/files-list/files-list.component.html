@@ -1,7 +1,12 @@
 <h3>Files list:</h3>
 
-<div *ngIf="files">
+<div *ngIf="files && files.length > 0">
 <li *ngFor="let file of files">
   <button (click)="gotoFile(file)">{{file.faculty}}/{{file.discipline}}/{{file.documentType}}/{{file.creator.login}}/{{file.name}}</button> {{file.checked}}
 </li>
 </div>
+
+<div *ngIf="!files || files.length == 0">
+  Список файлов пуст!
+</div>
+
