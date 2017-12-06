@@ -17,23 +17,25 @@ export class FileListService extends Subject<FileInfo[]>{
 
   loadAllFiles(){
     this.navigationService.getAllFiles().subscribe(files=>{
-      this.setFiles(files);
+      this.setFiles(files, true);
     });
   }
 
-  setFiles(files: FileInfo[]){
-    files.sort((a: FileInfo, b:FileInfo) => {
-      let ai = a.checked ? 1 : 0;
-      let bi = b.checked ? 1 : 0;
-      return ai - bi;
-    });
+  setFiles(files: FileInfo[], sort: boolean){
+    if(sort) {
+      files.sort((a: FileInfo, b: FileInfo) => {
+        let ai = a.checked ? 1 : 0;
+        let bi = b.checked ? 1 : 0;
+        return ai - bi;
+      });
+    }
     this.files = files;
     this.next(files);
   }
 
   loadUserFiles(userId: number){
     this.navigationService.getUserFiles(userId).subscribe(files=>{
-      this.setFiles(files);
+      this.setFiles(files, true);
     });
   }
 }
