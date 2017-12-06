@@ -1,0 +1,8 @@
+<h3>Editing account</h3>
+
+<label>Change password:
+  <input [(ngModel)]="authData.password" type="password">
+</label>
+
+<button (click)="applyChanges()">Apply changes</button>
+<button (click)="goBack()">Go back</button>

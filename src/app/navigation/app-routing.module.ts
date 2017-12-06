@@ -4,6 +4,7 @@ import {FileComponent} from "./file/file.component";
 import {NavigationComponent} from "./folders/navigation.component";
 import {FileUploadComponent} from "./upload/upload.component";
 import {UsersListComponent} from "../management/users-list/users-list.component";
+import {EditAccountComponent} from "../login/edit-account/edit-account.component";
 import {FilesListComponent} from "./files-list/files-list.component";
 
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'fileUpload', component: FileUploadComponent },
   { path: 'usersList', component: UsersListComponent },
   { path: 'fileInfo/:id', component: FileComponent },
+  { path: 'editAccount', component: EditAccountComponent },
   { path: 'files', component: FilesListComponent }
 ];
 

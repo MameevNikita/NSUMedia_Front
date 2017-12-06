@@ -37,7 +37,7 @@ export class ManagementComponent implements OnInit {
   }
 
   editAccount() {
-
+    this.router.navigate(['/editAccount']);
   }
 
   showMyFiles() {

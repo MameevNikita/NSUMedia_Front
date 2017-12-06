@@ -21,6 +21,7 @@ export class LoginService extends Subject<any> {
   private userLogout = this.SERVER + 'logoff';
   private userInfo = this.SERVER + 'register';
   private myUserInfo = this.SERVER + '/users/me';
+  private changePassword = this.SERVER + '/password/change';
 
   private token: string;
   private savedUserInfo: UserPublic;
@@ -44,7 +45,6 @@ export class LoginService extends Subject<any> {
       });
     }
   }
-
 
   getMyUserInfo(): Observable<UserPublic> {
     return new Observable<UserPublic>(observer => {
@@ -108,5 +108,10 @@ export class LoginService extends Subject<any> {
         this.onUserStateChanged();
       });
     });
+  }
+
+  edit(authData: AuthData): Observable<UserPublic> {
+    authData.login = this.savedUserInfo.login;
+    return this.http.post<UserPublic>(this.changePassword, authData, {headers: this.getAuthHeaders()});
   }
 }
