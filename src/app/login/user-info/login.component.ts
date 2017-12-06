@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {LoginService} from "./login.service";
-import {AuthData} from "./auth-data";
-import {UserPublic} from "./user-public";
-import {UsersService} from "../management/user.service";
+import {Component, OnInit} from "@angular/core";
+import {LoginService} from "../login.service";
+import {UserPublic} from "../user-public";
+import {AuthData} from "../auth-data";
+import {UsersService} from "../../management/user.service";
 import {Router} from "@angular/router";
 
 @Component({
