@@ -1,24 +1,29 @@
-<h2>Navigation</h2>
 <div *ngIf="currentFolder">
 
-
-  <h3>Current folder: {{currentFolder.name}}</h3>
-
-  <div *ngIf="currentFolder.parentFolder">
-    <button (click)="gotoFolder(currentFolder.parentFolder)">{{currentFolder.parentFolder.name}}</button>
+  <div class="outerPanel">
+    <div class="header">
+      Текущая папка: {{currentFolder.name}}
+    </div>
   </div>
 
-  <li *ngFor="let folder of currentFolder.subfolders">
-    <button (click)="gotoFolder(folder)">{{folder.name}}</button>
-  </li>
+  <div class="outerPanel" *ngIf="currentFolder.parentFolder">
+    <button class="innerPanel" (click)="gotoFolder(currentFolder.parentFolder)">../</button>
+  </div>
 
-  <li *ngFor="let file of currentFolder.files">
-    <button (click)="gotoFile(file)">{{file.name}}</button>
-  </li>
+  <div class="outerPanel" *ngFor="let folder of currentFolder.subfolders">
+    <button class="innerPanel" (click)="gotoFolder(folder)">{{folder.name}}</button>
+  </div>
+
+  <div class="outerPanel" *ngFor="let file of currentFolder.files">
+    <button class="innerPanel" (click)="gotoFile(file)">{{file.name}}</button>
+  </div>
 
 </div>
 
-<button (click)="uploadFile()">Upload new file!</button>
-
-
+<div *ngIf="isLogged()">
+  <br>
+  <div class="outerPanel">
+    <button class="uploadButton" (click)="uploadFile()">Загрузить новый файл!</button>
+  </div>
+</div>
 

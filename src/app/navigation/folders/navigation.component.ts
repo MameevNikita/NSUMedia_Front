@@ -3,17 +3,23 @@ import {NavigationService} from "../navigation.service";
 import {Folder} from "../folder";
 import {Router} from "@angular/router";
 import {FileInfo} from "../file";
+import {LoginService} from "../../login/login.service";
 
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  styleUrls: ['./navigation.component.css'],
+
 })
 export class NavigationComponent implements OnInit {
   private currentFolder: Folder;
 
-  constructor(private navigationService: NavigationService, private router: Router) {
+  constructor(private navigationService: NavigationService, private router: Router, private loginService: LoginService) {
+  }
+
+  isLogged(): boolean{
+    return this.loginService.isLogged();
   }
 
   ngOnInit() {

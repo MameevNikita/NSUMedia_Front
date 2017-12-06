@@ -1,0 +1,16 @@
+button{
+  width: auto;
+}
+
+table{
+  width: 98%;
+  margin-left: 1%;
+}
+
+td.keyRow{
+  width: 70pt;
+}
+
+td.valueRow{
+  width: calc(100% - 70pt);
+}

@@ -1,32 +1,62 @@
-<h2>File upload</h2>
+<table>
+  <tr>
+    <td>
+      Факультет:
+    </td>
+    <td>
+      <input type="text" (keyup)="facultyChange($event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Предмет:
+    </td>
+    <td>
+      <input type="text" (keyup)="disciplineChange($event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Тип документа:
+    </td>
+    <td>
+      <input type="text" (keyup)="documentTypeChange($event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Читаемость:
+    </td>
+    <td><input type="number" min="1" max="5" step="1" placeholder="1" (change)="readabilityChanged($event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Полнота:
+    </td>
+    <td><input type="number" min="1" max="5" step="1" placeholder="1" (change)="fullnessChanged($event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Год:
+    </td>
+    <td><input type="number" min="1970" max="2070" step="1" placeholder="1970" (change)="yearChanged($event)">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Файл:
+    </td>
+    <td>
+      <input type="file" (change)="fileChange($event)" placeholder="Upload file">
+    </td>
+  </tr>
 
-<div>
-  Факультет:
-  <input type="text" (keyup)="facultyChange($event)">
-</div>
+</table>
 
-<div>
-  Предмет:
-  <input type="text" (keyup)="disciplineChange($event)">
+<div class="buttonPanel">
+  <button class="importantButton" (click)="upload()" [disabled]="!isMetainfoValid()">Загрузить</button>
+  <button (click)="goBack()">Вернуться назад</button>
 </div>
-
-<div>
-  Тип документа:
-  <input type="text" (keyup)="documentTypeChange($event)">
-</div>
-<div>
-  Readability: <input type="number" min="1" max="5" step="1" placeholder="1" (change)="readabilityChanged($event)">
-</div>
-<div>
-  Fullness: <input type="number" min="1" max="5" step="1" placeholder="1" (change)="fullnessChanged($event)">
-</div>
-<div>
-  Year: <input type="number" min="1970" max="2070" step="1" placeholder="1970" (change)="yearChanged($event)">
-</div>
-
-<input type="file" (change)="fileChange($event)" placeholder="Upload file">
-
-<button (click)="upload()" [disabled]="!isMetainfoValid()">Upload</button>
-
-<button (click)="goBack()">Go back</button>
 

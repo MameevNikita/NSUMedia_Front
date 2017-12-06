@@ -1,25 +1,16 @@
+<body class="centralPanel">
 <div *ngIf="!isLogged()">
 
-  <div>
-    <label>Login:
-      <input [(ngModel)]="authData.login">
-    </label>
-  </div>
+  <input [(ngModel)]="authData.login" placeholder="Логин">
+  <input [(ngModel)]="authData.password" type="password" placeholder="Пароль">
 
-  <div>
-    <label>Password:
-      <input [(ngModel)]="authData.password" type="password">
-    </label>
-  </div>
-
-  <button (click)="register()">Sign up</button>
-  <button (click)="enter()">Sign in</button>
+  <button class="importantButton" (click)="enter()">Вход</button>
+  <button (click)="register()">Регистрация</button>
 
 </div>
 
-<div *ngIf="isLogged()">
-  <div *ngIf="userInfo">
-    <h2>You are logged as {{userInfo.login}}. Role: {{userInfo.role}}</h2>
-  </div>
-  <button (click)="logout()">Logout</button>
+<div *ngIf="isLogged() && userInfo">
+  Добро пожаловать, {{userInfo.login}}!
+  <button (click)="logout()">Выход</button>
 </div>
+</body>

@@ -1,0 +1,25 @@
+div.centralLine{
+  width: 650pt;
+}
+
+div.borderLine{
+  width: 150pt;
+}
+
+body{
+  white-space: nowrap;
+}
+
+div.centralLine{
+  width: 60%;
+  margin-left: 20%;
+  position: absolute;
+}
+
+div.borderLine{
+  width: 16%;
+  margin-left: 2%;
+  position: absolute;
+  top: 90pt;
+}
+
